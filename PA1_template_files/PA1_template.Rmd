@@ -2,7 +2,7 @@
 title: "Reproducible Research Course Project 1"
 author: "Srinivas Govindu"
 date: "March 6, 2016"
-output: pdf_document
+output: html_document
 ---
 
 ##Introduction 
@@ -48,7 +48,7 @@ Check the data with str() and head():
 str(activityMonitorData)
 summary(activityMonitorData)
 ```
-###What is mean total number of steps taken per day?
+###What is mean and median total number of steps taken per day?
 For this part of the assignment the missing values can be ignored.
 
 Calculate the total number of steps taken per day.
@@ -64,14 +64,14 @@ NumberOfSteps <- activityMonitorData %>%
   print
                     
 ```
-
+###Histogram of the total number of steps taken each day
 Plotting  Histogram
 ```{r}
 ggplot(NumberOfSteps, aes(x = steps)) + geom_histogram(fill = "blue", binwidth = 1000) +
   labs( x = "Steps per day", y = "Frequency", title = "Histogram of Steps per day")
 ```
 
-Total number of steps taken per day:
+###Mean and median number of steps taken each day:
 
 ```{r}
 mean_NumberOfSteps <- mean(NumberOfSteps$steps, na.rm = TRUE )
@@ -106,7 +106,8 @@ Using which.max() to find out the maximum steps contain on an average across all
 averageNumberOfSteps[which.max(averageNumberOfSteps$steps),]
 ```
 
-###Imputing missing values
+###Code to describe and show a strategy for imputing missing data
+Imputing missing values
 
 Note that there are a number of days/intervals where there are missing values
 (coded as NA). The presence of missing days may introduce bias into some
@@ -151,6 +152,7 @@ Check that there are no missing values:
 sum(is.na(activityMonitorData_ORG$steps))
 ```
 
+###The 5-minute interval that, on average, contains the maximum number of steps
 
 Calculate the number of steps taken in each 5-minute interval per day using dplyr and group by interval. Using ggplot for making the histogram:
 
